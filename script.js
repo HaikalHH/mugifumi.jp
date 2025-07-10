@@ -158,11 +158,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 150);
             
             // Handle specific button actions
-            if (this.textContent.includes('VIEW MORE')) {
-                document.querySelector('#history').scrollIntoView({
-                    behavior: 'smooth'
-                });
-            } else if (this.textContent.includes('LEARN MORE')) {
+            // VIEW MORE button functionality disabled for now
+            // if (this.textContent.includes('VIEW MORE')) {
+            //     document.querySelector('#history').scrollIntoView({
+            //         behavior: 'smooth'
+            //     });
+            // } 
+            if (this.textContent.includes('LEARN MORE')) {
                 document.querySelector('#product').scrollIntoView({
                     behavior: 'smooth'
                 });
