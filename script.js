@@ -172,46 +172,37 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Mobile menu toggle (if needed for future mobile optimization)
-    function createMobileMenu() {
-        const header = document.querySelector('.header .container');
-        const nav = document.querySelector('.nav');
-        
-        // Create hamburger button
-        const hamburger = document.createElement('button');
-        hamburger.className = 'hamburger';
-        hamburger.innerHTML = '☰';
-        hamburger.style.display = 'none';
-        hamburger.style.background = 'none';
-        hamburger.style.border = 'none';
-        hamburger.style.color = 'white';
-        hamburger.style.fontSize = '1.5rem';
-        hamburger.style.cursor = 'pointer';
-        
-        // Add to header
-        header.appendChild(hamburger);
-        
-        // Toggle mobile menu
+    // Mobile hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const navbar = document.getElementById('navbar');
+    
+    if (hamburger && navbar) {
         hamburger.addEventListener('click', function() {
-            nav.classList.toggle('mobile-open');
+            navbar.classList.toggle('mobile-active');
+            
+            // Change hamburger icon
+            if (navbar.classList.contains('mobile-active')) {
+                hamburger.innerHTML = '✕';
+            } else {
+                hamburger.innerHTML = '☰';
+            }
         });
         
-        // Show/hide hamburger based on screen size
-        function checkScreenSize() {
-            if (window.innerWidth <= 768) {
-                hamburger.style.display = 'block';
-                nav.style.display = nav.classList.contains('mobile-open') ? 'flex' : 'none';
-            } else {
-                hamburger.style.display = 'none';
-                nav.style.display = 'flex';
-                nav.classList.remove('mobile-open');
-            }
-        }
+        // Close menu when clicking nav links
+        const navLinks = navbar.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navbar.classList.remove('mobile-active');
+                hamburger.innerHTML = '☰';
+            });
+        });
         
-        window.addEventListener('resize', checkScreenSize);
-        checkScreenSize();
+        // Close menu on window resize if desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                navbar.classList.remove('mobile-active');
+                hamburger.innerHTML = '☰';
+            }
+        });
     }
-    
-    // Initialize mobile menu
-    createMobileMenu();
 }); 
