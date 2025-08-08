@@ -138,11 +138,15 @@ document.addEventListener('DOMContentLoaded', function() {
         hamburger.addEventListener('click', function() {
             navbar.classList.toggle('mobile-active');
             
-            // Change hamburger icon
-            if (navbar.classList.contains('mobile-active')) {
-                hamburger.innerHTML = '✕';
-            } else {
-                hamburger.innerHTML = '☰';
+            // Keep the same icon (5.png) for both states
+            const img = hamburger.querySelector('img');
+            if (img) {
+                // Add rotation effect instead of changing icon
+                if (navbar.classList.contains('mobile-active')) {
+                    img.style.transform = 'rotate(90deg)';
+                } else {
+                    img.style.transform = 'rotate(0deg)';
+                }
             }
         });
         
@@ -152,7 +156,10 @@ document.addEventListener('DOMContentLoaded', function() {
             link.addEventListener('click', function() {
                 // Don't prevent default - let the link navigate
                 navbar.classList.remove('mobile-active');
-                hamburger.innerHTML = '☰';
+                const img = hamburger.querySelector('img');
+                if (img) {
+                    img.style.transform = 'rotate(0deg)';
+                }
             });
         });
         
@@ -160,7 +167,10 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('resize', function() {
             if (window.innerWidth > 768) {
                 navbar.classList.remove('mobile-active');
-                hamburger.innerHTML = '☰';
+                const img = hamburger.querySelector('img');
+                if (img) {
+                    img.style.transform = 'rotate(0deg)';
+                }
             }
         });
     }

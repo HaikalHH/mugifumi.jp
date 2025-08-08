@@ -744,11 +744,16 @@ body {
     display: none;
     background: none;
     border: none;
-    color: #7a5734;
-    font-size: 1.5rem;
     cursor: pointer;
     padding: 0.5rem;
     z-index: 1001;
+}
+
+.hamburger img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
 }
 
 .nav.mobile-active {
