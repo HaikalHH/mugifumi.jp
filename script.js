@@ -37,59 +37,22 @@ function loadHeroImages() {
     });
 }
 
-// Smooth scrolling for navigation links
+// Page navigation functionality
 document.addEventListener('DOMContentLoaded', function() {
     // Load hero images first
     loadHeroImages();
+    
+    // Set active navigation based on current page
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     const navLinks = document.querySelectorAll('.nav-link');
     
     navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Remove active class from all links
-            navLinks.forEach(nav => nav.classList.remove('active'));
-            
-            // Add active class to clicked link
-            this.classList.add('active');
-            
-            // Get target section
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            
-            if (targetSection) {
-                // Calculate offset for fixed header
-                const headerHeight = document.querySelector('.header').offsetHeight;
-                const targetPosition = targetSection.offsetTop - headerHeight;
-                
-                // Smooth scroll to target
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-    
-    // Update active navigation on scroll
-    window.addEventListener('scroll', function() {
-        const sections = document.querySelectorAll('section');
-        const headerHeight = document.querySelector('.header').offsetHeight;
-        const scrollPosition = window.scrollY + headerHeight + 100;
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionBottom = sectionTop + section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-            const navLink = document.querySelector(`[href="#${sectionId}"]`);
-            
-            if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                navLinks.forEach(nav => nav.classList.remove('active'));
-                if (navLink) {
-                    navLink.classList.add('active');
-                }
-            }
-        });
+        const linkHref = link.getAttribute('href');
+        if (linkHref === currentPage) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
     });
     
     // Contact form handling
@@ -158,16 +121,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 150);
             
             // Handle specific button actions
-            // VIEW MORE button functionality disabled for now
-            // if (this.textContent.includes('VIEW MORE')) {
-            //     document.querySelector('#history').scrollIntoView({
-            //         behavior: 'smooth'
-            //     });
-            // } 
+            if (this.textContent.includes('VIEW MORE')) {
+                window.location.href = 'history.html';
+            } 
             if (this.textContent.includes('LEARN MORE')) {
-                document.querySelector('#product').scrollIntoView({
-                    behavior: 'smooth'
-                });
+                window.location.href = 'product.html';
             }
         });
     });
@@ -188,10 +146,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Close menu when clicking nav links
+        // Close menu when clicking nav links (for mobile)
         const navLinks = navbar.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
             link.addEventListener('click', function() {
+                // Don't prevent default - let the link navigate
                 navbar.classList.remove('mobile-active');
                 hamburger.innerHTML = '☰';
             });
