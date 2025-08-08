@@ -839,7 +839,13 @@ body {
     .hero-middle-image {
         height: 150px;
         max-width: 90%;
-        top: 42.5%;
+        top: 50%;
+    }
+    
+    .hero-text .btn-primary {
+        margin-bottom: 180px;
+        position: relative;
+        z-index: 20;
     }
     
     /* About Mobile - Fix height issues */
@@ -1014,6 +1020,13 @@ body {
     .hero-middle-image {
         height: 120px;
         max-width: 85%;
+        top: 50%;
+    }
+    
+    .hero-text .btn-primary {
+        margin-bottom: 150px;
+        position: relative;
+        z-index: 20;
     }
     
     .container {
@@ -1041,6 +1054,13 @@ body {
     .hero-middle-image {
         height: 100px;
         max-width: 80%;
+        top: 50%;
+    }
+    
+    .hero-text .btn-primary {
+        margin-bottom: 130px;
+        position: relative;
+        z-index: 20;
     }
     
     .product-showcase {
